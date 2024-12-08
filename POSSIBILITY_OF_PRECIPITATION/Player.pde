@@ -21,14 +21,14 @@ class Player  {
   
   void update()  {
     if(left && velocity.x > -3)  {
-      acceleration.x = -0.2;
+      acceleration.x = -0.15;
       if(velocity.x > 0 && velocity.y == 0)  {
          acceleration.x = -0.6;
       }
     }
     
     if(right && velocity.x < 3)  {
-      acceleration.x = 0.2;
+      acceleration.x = 0.15;
       if(velocity.x < 0 && velocity.y == 0)  {
          acceleration.x = 0.6;
       }
