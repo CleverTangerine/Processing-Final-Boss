@@ -8,18 +8,23 @@ class OrangeRam  {
   
   boolean tryingToFall = false;
   
-  int attackTimer = 0;
+  int attackTimer = -100;
   int pathFindTimer = 60;
-  int health = 100;
+  int health = 50;
   int direction = 1;
   
   OrangeRam(float xPos, float yPos)  {
     position.x = xPos;
     position.y = yPos;
+    health *= 1 + (enemyWave / 10);
   }
   
-  void update()  {
-    if(attackTimer == 0)  {
+  boolean update()  {
+    if(attackTimer <= 0)  {
+      if(attackTimer < 0)  {
+        attackTimer++;
+      }
+      
       if(abs(position.x - player.position.x) < 80 && abs(position.y - player.position.y) < 40)  {
          attackTimer++;
          pathFindTimer = 0;
@@ -61,13 +66,17 @@ class OrangeRam  {
     
     fill(240,135,0);
     rect(position.x - enemyWidth / 2, position.y - enemyHeight, enemyWidth, enemyHeight);
+    
+    if(health <= 0)  {
+      return true;
+    } else return false;
   }
   
   void attacking()  {
     velocity.x = 0;
     attackTimer++;
     if(attackTimer == 30)  {
-      enemyHurtBox.add(new EnemyHurtBox(position.x - 30 + 30 * direction, position.y - enemyHeight * 1.2, 0, 0, 60, 50, 10, 10));
+      enemyHitBox.add(new EnemyHitBox(position.x - 30 + 30 * direction, position.y - enemyHeight * 1.2, 0, 0, 60, 50, 10, 10));
     } else if(attackTimer >= 100)  {
       attackTimer = 0;
     }
@@ -80,10 +89,10 @@ class OrangeRam  {
     prevPos = position.copy();
     
      if (player.position.x > position.x)  {
-       velocity.x = 2;
+       velocity.x = 3;
        direction = 1;
      } else  {
-       velocity.x = -2;
+       velocity.x = -3;
        direction = -1;
      }
      

@@ -1,4 +1,4 @@
-class EnemyHurtBox  {
+class EnemyHitBox  {
   PVector position = new PVector(0,0);
   PVector velocity = new PVector(0,0);
   PVector rotationVel = new PVector(0,0);
@@ -7,7 +7,7 @@ class EnemyHurtBox  {
   int lifeSpan;
   int damage;
   
-  EnemyHurtBox(float xPos, float yPos, float xVel, float yVel, int sizeW, int sizeH, int damage, int duration)  {
+  EnemyHitBox(float xPos, float yPos, float xVel, float yVel, int sizeW, int sizeH, int damage, int duration)  {
     position.x = xPos;
     position.y = yPos;
     velocity.x = xVel;

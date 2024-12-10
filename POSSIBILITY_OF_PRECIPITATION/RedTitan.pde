@@ -8,17 +8,18 @@ class RedTitan  {
   
   boolean tryingToFall = false;
   
-  int attackTimer = -200;
+  int attackTimer = -100;
   int pathFindTimer = 60;
-  int health = 100;
+  int health = 150;
   int direction = 1;
   
   RedTitan(float xPos, float yPos)  {
     position.x = xPos;
     position.y = yPos;
+    health *= 1 + (enemyWave / 10);
   }
   
-void update()  {
+boolean update()  {
     if(attackTimer <= 0)  {
       if(attackTimer < 0)  {
         attackTimer++;
@@ -26,7 +27,6 @@ void update()  {
       if(abs(position.x - player.position.x) < 80 && abs(position.y - player.position.y) < 80)  {
          attackTimer++;
          pathFindTimer = 0;
-         //println("attacking");
        }
        if(pathFindTimer <= 0)  {
          pathFind(); 
@@ -65,6 +65,10 @@ void update()  {
     
     fill(240,0,0);
     rect(position.x - enemyWidth / 2, position.y - enemyHeight, enemyWidth, enemyHeight);
+    
+    if(health <= 0)  {
+      return true;
+    } else return false;
   }
   
   
@@ -72,7 +76,7 @@ void update()  {
     velocity.x = 0;
     attackTimer++;
     if(attackTimer == 45)  {
-      enemyHurtBox.add(new EnemyHurtBox(position.x - 70 + 70 * direction, position.y - enemyHeight * 1.2, 0, 0, 140, 160, 20, 10));
+      enemyHitBox.add(new EnemyHitBox(position.x - 70 + 70 * direction, position.y - enemyHeight * 1.2, 0, 0, 140, 160, 20, 10));
     } else if(attackTimer >= 120)  {
       attackTimer = 0;
     }

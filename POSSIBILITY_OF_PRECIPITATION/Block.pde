@@ -15,7 +15,7 @@ class Block  {
   
   void update()  {
     if(semiSolid)  {
-      fill(100);
+      fill(200);
     } else fill(0, 150, 0);
     rect(blockX, blockY, blockW, blockH);
   }

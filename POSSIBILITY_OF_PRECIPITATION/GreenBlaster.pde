@@ -15,9 +15,10 @@ class GreenBlaster  {
   GreenBlaster(float xPos, float yPos)  {
     position.x = xPos;
     position.y = yPos;
+    health *= 1 + (enemyWave / 10);
   }
   
-void update()  {
+boolean update()  {
     if(attackTimer <= 0)  {
       if(attackTimer < 0)  {
         attackTimer++;
@@ -62,6 +63,10 @@ void update()  {
     
     fill(0,0,180);
     rect(position.x - enemyWidth / 2, position.y - enemyHeight, enemyWidth, enemyHeight);
+    
+    if(health <= 0)  {
+      return true;
+    } else return false;
   }
   
   
@@ -71,8 +76,7 @@ void update()  {
     attackTimer++;
     
     if(attackTimer == 30)  {
-      println(direction);
-      enemyHurtBox.add(new EnemyHurtBox(position.x, position.y - enemyHeight / 2, 10 * direction, 0, 20, 20, 8, 100));
+      enemyHitBox.add(new EnemyHitBox(position.x, position.y - enemyHeight / 2, 10 * direction, 0, 20, 20, 8, 100));
     } else if(attackTimer >= 100)  {
       attackTimer = -10;
     }
