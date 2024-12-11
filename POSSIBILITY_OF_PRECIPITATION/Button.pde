@@ -1,4 +1,5 @@
 class Button  {
+  // buttonW is the width, and buttonH is the height
   PVector position = new PVector(0,0);
   int buttonW = 200;
   int buttonH = 80;
@@ -11,7 +12,9 @@ class Button  {
   }
   
   void display()  {
-    fill(200, 100, 100);
+    fill(240, 50, 50);
     rect(position.x, position.y, buttonW, buttonH);
+    fill(20, 200, 20);
+    triangle(230, 330, 230, 370, 260, 350);
   }
 }
